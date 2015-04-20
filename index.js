@@ -34,6 +34,10 @@ exports.register = function (plugin, options, next) {
     io.sockets.on('connection', function (socket) {
         console.log('a user connected');
         // Setup handlers
+        if(settings.connectHandler){
+
+           settings.connectHandler(socket);
+        }
         socket.on('message', settings.messageHandler(socket));
         socket.on('disconnect', settings.disconnectHandler(socket));
 
